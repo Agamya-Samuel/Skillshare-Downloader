@@ -1,0 +1,11 @@
+python-slugify
+requests
+cloudscraper
+anonfile
+
+python-telegram-bot
+
+# MongoDB
+pymongo==4.0.2
+python-dotenv
+pymongo[srv]
