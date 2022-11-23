@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from datetime import datetime
 
 class Open_DB_Connection():
     
@@ -39,38 +40,48 @@ class Open_DB_Connection():
 
     def __exit__(self, *args):
         self.disconnect_db(cluster = self.db_cluster)
-    
-def format_document(id, url, name, adder, anon, pd):
+
+# Outside-Class Functions
+
+def format_document(id, url, name, user, date, anon, pd):
     return {
         '_id': int(id),
         'url': str(url),
         'name': str(name),
-        'adder': int(adder),
-        'anon': list(anon),
-        'pd': list(pd)
+        'user': int(user),
+        'date': date,
+        'anon': str(anon),
+        'pd': str(pd)
     }
 
-def insert_document(collection, id, url, name, adder, anon, pd):
+def insert_document(collection, id, url, name, user, anon, pd):
     final_doc = format_document(
         id = id,
         url = url,
         name = name,
-        adder = adder,
+        user = user,
+        date = round(datetime.timestamp(datetime.today())),
         anon = anon,
         pd = pd
         )
     collection.insert_one(document = final_doc)
 
+def find_document(id, collection):
+    cursor = collection.find({'_id': id})
+    try:
+        cursor[0]
+        return cursor
+    except IndexError:
+        return None    
 
-
-
-
-
-
-
-
-def find_document(id, collctn):
-    collection.find('_id': id)    
-
-def check_duplicate(id) -> bool:
-    pass
+def is_duplicate(id, collection) -> bool:
+    resp = find_document(
+        id = id,
+        collection = collection
+        )
+    if resp:
+        print(f'ID already exist in the DB')
+        print(f'{resp[0] = }')
+        return True
+    else:
+        return False

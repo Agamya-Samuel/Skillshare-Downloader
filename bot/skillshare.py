@@ -184,7 +184,7 @@ def download_course_by_class_id(course_id):
     
     return base_path, slugify(title), slugify(teacher_name)
 
-def download_course_by_url(url):
+def get_course_id(url):
     m = re.match(r'https://www.skillshare.com/classes/.*?/(\d+)', url)
     if m is None:
         m = re.match(r'https://www.skillshare.com/[a-zA-Z]+/classes/.*?/(\d+)', url)
@@ -193,4 +193,4 @@ def download_course_by_url(url):
         raise Exception('Failed to parse class ID from URL')
 
     course_id = m.group(1)
-    return download_course_by_class_id(course_id=course_id)
+    return int(course_id)
