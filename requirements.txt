@@ -3,7 +3,7 @@ requests
 cloudscraper
 anonfile
 
-python-telegram-bot
+python-telegram-bot==13.14
 
 # MongoDB
 pymongo==4.0.2
