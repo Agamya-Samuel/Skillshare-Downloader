@@ -20,6 +20,14 @@ pixeldrain_url = None
 # gofile_url = None
 # gofile_folder_url = None
 
+def beautify_str(string) -> str:
+    new_list = []
+    list = slugify(string).split('-')
+    for l in list:
+        l.capitalize()
+        new_list.append(l)
+    return " ".join(new_list)
+
 def is_unicode_string(string):
     if isinstance(string, str):
         return True

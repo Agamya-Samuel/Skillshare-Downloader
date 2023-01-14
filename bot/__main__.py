@@ -80,7 +80,7 @@ def this_function_does_everything(url, user_id):
             return [anon_url, pd_url]
 
 
-        # IF Course_ID already exists in the DB, just search the ID in DB and return back user the Downlaod Links
+        # IF Course_ID already exists in the DB, just search the ID in DB and return back to the user the Downlaod Links
         else:
             cursor = find_document(
                 collection = collctn,
